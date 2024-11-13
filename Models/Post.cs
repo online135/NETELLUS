@@ -9,6 +9,9 @@
         public DateTime UpdatedAt { get; set; }
 
         // 一對多關係, 每篇文章有多個評論
-        public List<Comment> Comments { get; set; } = new List<Comment>();
+        public List<Comment> Comments { get; set; } = [];
+
+        // 文章的點讚列表
+        public List<Like> Likes { get; set; } = [];
     }
 }
