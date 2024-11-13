@@ -1,14 +1,12 @@
 ﻿namespace NETELLUS.Models
 {
-    public class Post
+    public class Comment
     {
         public int Id { get; set; }
-        public string Title { get; set; }
+        public int PostId { get; set; }  // 外鍵, 關聯 Post
+        public string Author { get; set; }
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-
-        // 一對多關係, 每篇文章有多個評論
-        public List<Comment> Comments { get; set; } = new List<Comment>();
     }
 }
