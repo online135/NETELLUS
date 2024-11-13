@@ -3,24 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\User\\Desktop\\NETELLUS\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{AB010D28-8549-4F44-852A-CEFB033439C0}|NETELLUS.csproj|c:\\users\\user\\desktop\\netellus\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{AB010D28-8549-4F44-852A-CEFB033439C0}|NETELLUS.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB010D28-8549-4F44-852A-CEFB033439C0}|NETELLUS.csproj|c:\\users\\user\\desktop\\netellus\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB010D28-8549-4F44-852A-CEFB033439C0}|NETELLUS.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB010D28-8549-4F44-852A-CEFB033439C0}|NETELLUS.csproj|c:\\users\\user\\desktop\\netellus\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB010D28-8549-4F44-852A-CEFB033439C0}|NETELLUS.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{AB010D28-8549-4F44-852A-CEFB033439C0}|NETELLUS.csproj|c:\\users\\user\\desktop\\netellus\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AB010D28-8549-4F44-852A-CEFB033439C0}|NETELLUS.csproj|solutionrelative:controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AB010D28-8549-4F44-852A-CEFB033439C0}|NETELLUS.csproj|c:\\users\\user\\desktop\\netellus\\extensions\\nullableobjectextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AB010D28-8549-4F44-852A-CEFB033439C0}|NETELLUS.csproj|solutionrelative:extensions\\nullableobjectextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AB010D28-8549-4F44-852A-CEFB033439C0}|NETELLUS.csproj|c:\\users\\user\\desktop\\netellus\\netellus.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{AB010D28-8549-4F44-852A-CEFB033439C0}|NETELLUS.csproj|solutionrelative:netellus.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AB010D28-8549-4F44-852A-CEFB033439C0}|NETELLUS.csproj|c:\\users\\user\\desktop\\netellus\\models\\post.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AB010D28-8549-4F44-852A-CEFB033439C0}|NETELLUS.csproj|solutionrelative:models\\post.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AB010D28-8549-4F44-852A-CEFB033439C0}|NETELLUS.csproj|c:\\users\\user\\desktop\\netellus\\models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AB010D28-8549-4F44-852A-CEFB033439C0}|NETELLUS.csproj|solutionrelative:models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AB010D28-8549-4F44-852A-CEFB033439C0}|NETELLUS.csproj|c:\\users\\user\\desktop\\netellus\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AB010D28-8549-4F44-852A-CEFB033439C0}|NETELLUS.csproj|solutionrelative:controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,67 +34,84 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "NullableObjectExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\NETELLUS\\Extensions\\NullableObjectExtensions.cs",
-              "RelativeDocumentMoniker": "Extensions\\NullableObjectExtensions.cs",
-              "ToolTip": "C:\\Users\\User\\Desktop\\NETELLUS\\Extensions\\NullableObjectExtensions.cs",
-              "RelativeToolTip": "Extensions\\NullableObjectExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-12T15:23:55.449Z"
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\NETELLUS\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\User\\Desktop\\NETELLUS\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-13T21:46:46.841Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Comment.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\NETELLUS\\Models\\Comment.cs",
-              "RelativeDocumentMoniker": "Models\\Comment.cs",
-              "ToolTip": "C:\\Users\\User\\Desktop\\NETELLUS\\Models\\Comment.cs",
-              "RelativeToolTip": "Models\\Comment.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAwwAkAAAAIAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\NETELLUS\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\NETELLUS\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "Controllers\\UsersController.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAiwFMAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-12T12:54:17.195Z"
+              "WhenOpened": "2024-11-13T21:46:31.836Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\NETELLUS\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\NETELLUS\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAmwE8AAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-13T21:34:42.026Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "NETELLUS",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\NETELLUS\\NETELLUS.csproj",
+              "RelativeDocumentMoniker": "NETELLUS.csproj",
+              "ToolTip": "C:\\Users\\User\\Desktop\\NETELLUS\\NETELLUS.csproj",
+              "RelativeToolTip": "NETELLUS.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-11-13T21:26:43.808Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Post.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\NETELLUS\\Models\\Post.cs",
               "RelativeDocumentMoniker": "Models\\Post.cs",
               "ToolTip": "C:\\Users\\User\\Desktop\\NETELLUS\\Models\\Post.cs",
               "RelativeToolTip": "Models\\Post.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-12T11:38:37.665Z"
+              "WhenOpened": "2024-11-13T14:29:05.314Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "WeatherForecastController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\NETELLUS\\Controllers\\WeatherForecastController.cs",
-              "RelativeDocumentMoniker": "Controllers\\WeatherForecastController.cs",
-              "ToolTip": "C:\\Users\\User\\Desktop\\NETELLUS\\Controllers\\WeatherForecastController.cs",
-              "RelativeToolTip": "Controllers\\WeatherForecastController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-11T15:25:10.287Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "PostController.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\NETELLUS\\Controllers\\PostController.cs",
               "RelativeDocumentMoniker": "Controllers\\PostController.cs",
               "ToolTip": "C:\\Users\\User\\Desktop\\NETELLUS\\Controllers\\PostController.cs",
               "RelativeToolTip": "Controllers\\PostController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHgAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-12T11:36:37.946Z",
+              "WhenOpened": "2024-11-13T14:28:23.455Z",
               "EditorCaption": ""
             }
           ]
