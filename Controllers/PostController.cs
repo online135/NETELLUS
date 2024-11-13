@@ -51,17 +51,43 @@ namespace NETELLUS.Controllers
 
         // 獲取所有文章
         [HttpGet]
+        public List<Post> getAllPost()
+        {
+            return posts;
+        }
 
         // 獲取特定文章
         [HttpGet("{id}")]
+        public Post getPostById(int id)
+        {
+            return (Post)posts.Where(x => x.Id == id);
+        }
 
         // 創建新文章
         [HttpPost]
+        public void setNewPost(Post post)
+        {
+            post.CreatedAt = DateTime.Now;
+            posts.Add(post);
+        }
 
         // 更新文章
         [HttpPut("{id}")]
+        public void updatePost(int id, Post post)
+        {
+            foreach (var item in posts.Where(x => x.Id == id))
+            {
+                item.Title = post.Title;
+                item.Content = post.Content;
+                item.UpdatedAt = DateTime.Now;
+            }
+        }
 
         // 刪除文章
         [HttpDelete("{id}")]
+        public void deletePostById(int id)
+        {
+            posts.Remove(this.getPostById(id));
+        }
     }
 }
