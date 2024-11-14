@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
+using NETELLUS.Extensions;
 using NETELLUS.Models;
+using System.Xml.Linq;
 
 namespace NETELLUS.Controllers
 {
@@ -9,8 +11,8 @@ namespace NETELLUS.Controllers
     public class PostController : ControllerBase
     {
         // 初始化假數據列表
-        private static List<Post> posts = new List<Post>
-        {
+        private static readonly List<Post> posts =
+        [
             new() {
                 Id = 1,
                 Title = "Introduction to C#",
@@ -24,70 +26,75 @@ namespace NETELLUS.Controllers
                 Content = "ASP.NET Core is a cross-platform framework for building modern, cloud-based web applications.",
                 CreatedAt = DateTime.Now.AddDays(-8),
                 UpdatedAt = DateTime.Now.AddDays(-8)
-            },
-            new() {
-                Id = 3,
-                Title = "Understanding Dependency Injection",
-                Content = "Dependency Injection (DI) is a design pattern used in ASP.NET Core for managing class dependencies.",
-                CreatedAt = DateTime.Now.AddDays(-5),
-                UpdatedAt = DateTime.Now.AddDays(-5)
-            },
-            new() {
-                Id = 4,
-                Title = "Exploring Entity Framework Core",
-                Content = "Entity Framework Core is a modern Object-Relational Mapper (ORM) for .NET applications.",
-                CreatedAt = DateTime.Now.AddDays(-3),
-                UpdatedAt = DateTime.Now.AddDays(-2)
-            },
-            new() {
-                Id = 5,
-                Title = "Building REST APIs with ASP.NET Core",
-                Content = "Learn to build robust and scalable REST APIs using ASP.NET Core Web API.",
-                CreatedAt = DateTime.Now.AddDays(-1),
-                UpdatedAt = DateTime.Now
             }
-        };
+        ];
 
 
+        // 以標準的 restfulAPI 而言, 不需要標明主題, 除非難以辨認或特別有需要
+        // 所以 不是用 GetAllPost, 而是 GetAll, 以下都雷同
+        #region 文章
         // 獲取所有文章
         [HttpGet]
-        public List<Post> getAllPost()
+        public IEnumerable<Post> GetAll()
         {
             return posts;
         }
 
         // 獲取特定文章
         [HttpGet("{id}")]
-        public Post getPostById(int id)
+        public ActionResult<Post> GetById(int id)
         {
-            return (Post)posts.Where(x => x.Id == id);
+            // Where 是拉出多個的時候, 但PK不需要, 下面的 更新迴圈那裏概念亦同
+            // 個人討厭 var
+            Post? post = posts.FirstOrDefault(p => p.Id == id);
+
+            // 這是 extension 用法, 可以看一下自寫小功能, 通常會小除錯一下
+            if (post.IsNull())
+            {
+                return NotFound();
+            }
+            return post;
         }
 
         // 創建新文章
         [HttpPost]
-        public void setNewPost(Post post)
+        public ActionResult<Post> Create([FromBody] Post newPost)
         {
-            post.CreatedAt = DateTime.Now;
-            posts.Add(post);
+            newPost.Id = posts.Count > 0 ? posts.Max(p => p.Id) + 1 : 1; // 這行未來會刪掉, 改用DB來做到效果
+            newPost.CreatedAt = DateTime.Now;
+            newPost.UpdatedAt = DateTime.Now;
+            posts.Add(newPost);
+            return CreatedAtAction(nameof(GetById), new { id = newPost.Id }, newPost);
         }
 
         // 更新文章
         [HttpPut("{id}")]
-        public void updatePost(int id, Post post)
+        public IActionResult Update(int id, [FromBody] Post updatedPost)
         {
-            foreach (var item in posts.Where(x => x.Id == id))
+            Post? post = posts.FirstOrDefault(p => p.Id == id);
+            if (post.IsNull())
             {
-                item.Title = post.Title;
-                item.Content = post.Content;
-                item.UpdatedAt = DateTime.Now;
+                return NotFound();
             }
+
+            post.Title = updatedPost.Title;
+            post.Content = updatedPost.Content;
+            post.UpdatedAt = DateTime.Now;
+            return NoContent();
         }
 
         // 刪除文章
         [HttpDelete("{id}")]
-        public void deletePostById(int id)
+        public IActionResult Delete(int id)
         {
-            posts.Remove(this.getPostById(id));
+            Post? post = posts.FirstOrDefault(p => p.Id == id);
+            if (post.IsNull())
+            {
+                return NotFound();
+            }
+            posts.Remove(post);
+            return NoContent();
         }
+        #endregion
     }
 }
