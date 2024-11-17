@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NETELLUS.Extensions;
 using NETELLUS.Models;
-using System.Xml.Linq;
 
 namespace NETELLUS.Controllers
 {
+    // [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class PostController : ControllerBase
@@ -18,20 +18,54 @@ namespace NETELLUS.Controllers
                 Title = "Introduction to C#",
                 Content = "C# is a modern, object-oriented programming language developed by Microsoft.",
                 CreatedAt = DateTime.Now.AddDays(-10),
-                UpdatedAt = DateTime.Now.AddDays(-10)
+                UpdatedAt = DateTime.Now.AddDays(-10),
+                Comments =
+                [
+                    new Comment {
+                        Id = 1,
+                        PostId = 1,
+                        Author = "Alice",
+                        Content = "Great article!",
+                        CreatedAt = DateTime.Now.AddDays(-9),
+                        UpdatedAt = DateTime.Now.AddDays(-9)
+                    },
+                    new Comment {
+                        Id = 2,
+                        PostId = 1,
+                        Author = "Bob",
+                        Content = "Very informative.",
+                        CreatedAt = DateTime.Now.AddDays(-8) ,
+                        UpdatedAt = DateTime.Now.AddDays(-8)
+                    }
+                ],
+                Likes =
+                [
+                    new Like { Id = 1, UserId = 1, TargetId = 1, TargetType = "Post" },
+                    new Like { Id = 2, UserId = 2, TargetId = 1, TargetType = "Post" }
+                ]
             },
             new() {
                 Id = 2,
                 Title = "Getting Started with ASP.NET Core",
                 Content = "ASP.NET Core is a cross-platform framework for building modern, cloud-based web applications.",
                 CreatedAt = DateTime.Now.AddDays(-8),
-                UpdatedAt = DateTime.Now.AddDays(-8)
+                UpdatedAt = DateTime.Now.AddDays(-8),
+                Comments =
+                [
+                    new Comment {
+                        Id = 3,
+                        PostId = 2,
+                        Content = "I struggled with setup, but this helped.",
+                        CreatedAt = DateTime.Now.AddDays(-7)
+                    }
+                ],
+                Likes =
+                [
+                    new Like { Id = 3, UserId = 3, TargetId = 2, TargetType = "Post" }
+                ]
             }
         ];
 
-
-        // 以標準的 restfulAPI 而言, 不需要標明主題, 除非難以辨認或特別有需要
-        // 所以 不是用 GetAllPost, 而是 GetAll, 以下都雷同
         #region 文章
         // 獲取所有文章
         [HttpGet]
@@ -44,11 +78,7 @@ namespace NETELLUS.Controllers
         [HttpGet("{id}")]
         public ActionResult<Post> GetById(int id)
         {
-            // Where 是拉出多個的時候, 但PK不需要, 下面的 更新迴圈那裏概念亦同
-            // 個人討厭 var
             Post? post = posts.FirstOrDefault(p => p.Id == id);
-
-            // 這是 extension 用法, 可以看一下自寫小功能, 通常會小除錯一下
             if (post.IsNull())
             {
                 return NotFound();
@@ -60,7 +90,7 @@ namespace NETELLUS.Controllers
         [HttpPost]
         public ActionResult<Post> Create([FromBody] Post newPost)
         {
-            newPost.Id = posts.Count > 0 ? posts.Max(p => p.Id) + 1 : 1; // 這行未來會刪掉, 改用DB來做到效果
+            newPost.Id = posts.Count > 0 ? posts.Max(p => p.Id) + 1 : 1;
             newPost.CreatedAt = DateTime.Now;
             newPost.UpdatedAt = DateTime.Now;
             posts.Add(newPost);
@@ -94,6 +124,155 @@ namespace NETELLUS.Controllers
             }
             posts.Remove(post);
             return NoContent();
+        }
+        #endregion
+
+
+        #region 評論
+        // 獲取文章的所有評論
+        [HttpGet("{postId}/comments")]
+        public ActionResult<IEnumerable<Comment>> GetComments(int postId)
+        {
+            var post = posts.FirstOrDefault(p => p.Id == postId);
+            if (post.IsNull())
+            {
+                return NotFound();
+            }
+
+            return post.Comments;
+        }
+
+        // 為指定文章創建新評論
+        [HttpPost("{postId}/comments")]
+        public ActionResult<Comment> CreateComment(int postId, [FromBody] Comment newComment)
+        {
+            Post? post = posts.FirstOrDefault(p => p.Id == postId);
+            if (post.IsNull())
+            {
+                return NotFound();
+            }
+
+            newComment.Id = post.Comments.Count > 0 ? post.Comments.Max(c => c.Id) + 1 : 1;
+            newComment.PostId = postId;
+            newComment.CreatedAt = DateTime.Now;
+            newComment.UpdatedAt = DateTime.Now;
+
+            post.Comments.Add(newComment);
+            return CreatedAtAction(nameof(GetComments), new { postId = postId }, newComment);
+        }
+
+        // 更新指定評論
+        [HttpPut("{postId}/comments/{commentId}")]
+        public IActionResult UpdateComment(int postId, int commentId, [FromBody] Comment updatedComment)
+        {
+            var post = posts.FirstOrDefault(p => p.Id == postId);
+            if (post.IsNull())
+            {
+                return NotFound();
+            }
+
+            var comment = post.Comments.FirstOrDefault(c => c.Id == commentId);
+            if (comment.IsNull())
+            {
+                return NotFound();
+            }
+
+            comment.Content = updatedComment.Content;
+            comment.UpdatedAt = DateTime.Now; // 這裡保持創建時間一致，設置新的更新時間
+            return NoContent();
+        }
+
+        // 刪除指定評論
+        [HttpDelete("{postId}/comments/{commentId}")]
+        public IActionResult DeleteComment(int postId, int commentId)
+        {
+            Post? post = posts.FirstOrDefault(p => p.Id == postId);
+            if (post.IsNull())
+            {
+                return NotFound();
+            }
+
+            Comment? comment = post.Comments.FirstOrDefault(c => c.Id == commentId);
+            if (comment.IsNull())
+            {
+                return NotFound();
+            }
+
+            post.Comments.Remove(comment);
+            return NoContent();
+        }
+        #endregion
+
+
+        #region 點讚
+        // 為文章點讚或取消點讚
+        [HttpPost("{postId}/like")]
+        public IActionResult ToggleLikePost(int postId, [FromQuery] int userId)
+        {
+            Post? post = posts.FirstOrDefault(p => p.Id == postId);
+            if (post.IsNull())
+            {
+                return NotFound();
+            }
+
+            Like? existingLike = post.Likes.FirstOrDefault(l => l.UserId == userId);
+            if (existingLike.IsNotNull())
+            {
+                // 如果已經點讚，則取消點讚
+                post.Likes.Remove(existingLike);
+            }
+            else
+            {
+                // 如果未點讚，則添加讚
+                Like newLike = new()
+                {
+                    Id = post.Likes.Count > 0 ? post.Likes.Max(l => l.Id) + 1 : 1,
+                    UserId = userId,
+                    TargetId = postId,
+                    TargetType = "Post"
+                };
+                post.Likes.Add(newLike);
+            }
+
+            return Ok(new { LikesCount = post.Likes.Count, LikedBy = post.Likes.Select(l => l.UserId) });
+        }
+
+        // 為評論點讚或取消點讚
+        [HttpPost("{postId}/comments/{commentId}/like")]
+        public IActionResult ToggleLikeComment(int postId, int commentId, [FromQuery] int userId)
+        {
+            Post? post = posts.FirstOrDefault(p => p.Id == postId);
+            if (post.IsNull())
+            {
+                return NotFound();
+            }
+
+            Comment? comment = post.Comments.FirstOrDefault(c => c.Id == commentId);
+            if (comment.IsNull())
+            {
+                return NotFound();
+            }
+
+            Like? existingLike = comment.Likes.FirstOrDefault(l => l.UserId == userId);
+            if (existingLike.IsNotNull())
+            {
+                // 如果已經點讚，則取消點讚
+                comment.Likes.Remove(existingLike);
+            }
+            else
+            {
+                // 如果未點讚，則添加讚
+                Like newLike = new()
+                {
+                    Id = comment.Likes.Count > 0 ? comment.Likes.Max(l => l.Id) + 1 : 1,
+                    UserId = userId,
+                    TargetId = commentId,
+                    TargetType = "Comment"
+                };
+                comment.Likes.Add(newLike);
+            }
+
+            return Ok(new { LikesCount = comment.Likes.Count, LikedBy = comment.Likes.Select(l => l.UserId) });
         }
         #endregion
     }
